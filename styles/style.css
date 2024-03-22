@@ -1,0 +1,511 @@
+/* Здесь вы напишете основную часть стилей страницы.
+
+Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
+✦ theme-dark — класс тёмной темы
+✦ theme-light — класс светлой темы
+✦ like-icon — для svg-иконки анимированного сердца
+✦ card__like-button — для кнопки Like рядом с иконкой
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
+✦ button__text — для обозначения текстового элемента внутри кнопки
+
+Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
+
+*/
+
+.page {
+  min-inline-size: 320px;
+  min-block-size: 100dvb;
+  font-family: var(--main-font, "Courie", sans-serif);
+  background-color: var(--bg-color, #fff);
+  color: var(--accent-color, #000);
+  background-image: var(--bg-image);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: clamp(350px, 100%, 697px);
+  min-height: 369px;
+  block-size: 364px;
+  margin-top: 102px;
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  background-color: var(--bg-color, #fff);
+  border: 2px solid var(--accent-color, #000);
+}
+
+.header-text {
+  padding-top: clamp(7.5rem, 7.148rem + 1.502vw, 8.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.logo {
+  font-size: clamp(3.0625rem, 2.8244rem + 1.0159vw, 4.0625rem);
+  font-family: var(--accent-font, "PressStrart2P");
+  font-style: normal;
+  font-variation-settings: "wght" var(--text-font-weight);
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.header-title {
+  color: var(--accent-color, #000);
+  font-family: var(--accent-font, "PressStrart2P");
+  font-size: clamp(0.875rem, .7411rem + 0.5714vw, 1.4375rem);;
+  font-style: normal;
+  font-variation-settings: "wght" var(--text-font-weight);
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+@media (width<=375px) {
+  .header {
+    block-size: 327px;
+  }
+
+  .header-text {
+    padding-top: 120px;
+  }
+
+  .logo {
+    font-size: 49px;
+  }
+
+  .header-title {
+    font-size: 14px;
+  }
+}
+
+.theme-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 18px;
+}
+
+.theme-menu__button {
+  position: relative;
+  border: none;
+  background-color: transparent;
+  color: var(--accent-color, #000);
+  font-family: var(--accent-font, "PressStrart2P");
+  font-size: 14px;
+  font-style: normal;
+  font-variation-settings: "wght" var(--text-font-weight);
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.theme-menu__button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.theme-menu__button::after {
+  content: " ";
+  display: block;
+  width: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  height: 2px;
+  background-color: var(--accent-color,#000);
+  transition: width 0.3s ease;
+}
+
+.theme-menu__button:focus {
+  outline: none;
+}
+
+.theme-menu__button:focus-visible {
+  opacity: 0.6;
+  color: var(--accent-color, #000);
+}
+
+.theme-menu__button:focus-visible::after {
+  width: 100%;
+  transform: scaleX(1);
+}
+
+.theme-menu__button:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+.theme-menu__button:disabled::before {
+  content:"▶";
+  opacity: 0.6;
+  position: absolute;
+  pointer-events: none;
+  animation: selected ease-in-out 0.5s infinite alternate-reverse;
+  left: -20px;
+}
+
+@keyframes selected {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(4px);
+  }
+}
+
+.main {
+  width: clamp(350px, 100%, 697px);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color, #fff);
+  border: 2px solid var(--accent-color, #000);
+  overflow: hidden;
+}
+
+.card-title {
+  align-items: flex-start;
+  color: var(--accent-color, #000);
+  font-family: var(--main-font, "Courie", sans-serif);
+  font-size: var(--font-size, 18px);
+  font-style: normal;
+  font-weight: var(--title-font-weight, 700);
+  line-height: normal;
+  padding: 5px 10px;
+}
+
+.image-container {
+  position: relative;
+  z-index: 0;
+  border-top: 2px solid var(--accent-color, #000);
+  border-bottom: 2px solid var(--accent-color, #000);
+  width: clamp(375px, 100%, 696px);
+}
+
+.watermark {
+  position: absolute;
+  z-index: 1;
+  top: 25px;
+  right: 25px;
+  color: var(--accent-color, #000);
+  text-shadow: 1px 0 0 var(--watermark-color, #FFF);
+  font-family: var(--accent-font, "PressStrart2P");
+  font-size: 14px;
+  font-style: normal;
+  font-weight: var(--text-font-weight, 400);
+  line-height: normal;
+  opacity: 0.5;
+  mix-blend-mode: hard-light;
+}
+
+@supports ((text-stroke: 1px var(--watermark-color, #FFF)) or (-webkit-text-stroke: 1px var(--watermark-color, #FFF))) {
+.watermark {
+  -webkit-text-stroke: 1px var(--watermark-color, #FFF);
+  text-stroke: 1px var(--watermark-color, #FFF);
+  text-shadow: none;
+  }
+}
+
+@media (width<=375px) {
+
+  .watermark {
+    top: 23px;
+    right: 11px;
+  }
+}
+
+.image {
+  display: block;
+  inline-size: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
+
+.filter-bright {
+  filter: brightness(30%);
+}
+
+.filter-inver {
+  filter: invert(70%);
+}
+
+.filter-rotate {
+  filter: hue-rotate(0.3turn);
+}
+
+.filter-bw {
+  filter: grayscale(70%);
+}
+
+.filter-blur {
+  filter: blur(2px);
+}
+
+.filter-opacity {
+  filter: opacity(20%);
+}
+
+.filter-br-cont{
+  filter: contrast(87%), brightness(64%);
+}
+
+.card-text {
+  display: flex;
+  padding: 25px;
+  flex-direction: column;
+  font-family: var(--main-font, "Courie", sans-serif);
+  font-size: var(--font-size, 18px);
+  font-style: normal;
+  font-weight: var(--text-font-weight, 400);
+  line-height: 21px;
+  gap: 27px;
+}
+
+.button {
+  background: var(--bg-color, #fff);
+  cursor: pointer;
+  padding: 0;
+}
+
+.like-container {
+  display: flex;
+  align-items: center;
+  margin-right: 25px;
+  margin-bottom: 25px;
+  background: transparent;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.card__icon-button {
+  height: 38px;
+  outline: none;
+  border: 2px solid transparent;
+  align-self: end;
+  transition: border 0.3s ease;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  border: 2px solid var(--accent-color, #000);
+}
+
+.sparks {
+  opacity:0;
+}
+
+.card__like-button {
+  display: flex;
+  width: 130px;
+  height: 38px;
+  padding: 9px 17px;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--accent-color, #000);
+}
+
+.save-like {
+  position: relative;
+  transition: box-shadow ease-in-out 0.5s;
+}
+
+.save-like::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--bn-color, #fff);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform ease-in-out 0.5s;
+  mix-blend-mode: difference;
+}
+
+.save-like:hover::before {
+  transform: scaleX(1);
+}
+
+.save-like:focus {
+  outline: none;
+}
+
+.save-like:focus-visible {
+  box-shadow: 2px 2px 0px  var(--accent-color, #000);
+}
+
+.button__text {
+  color: var(--accent-color, #000);
+  font-family: var(--accent-font, "PressStrart2P");
+  font-size: 14px;
+  font-style: normal;
+  font-variation-settings: "wght" var(--text-font-weight);
+  line-height: 90%;
+}
+
+.save {
+  display: flex;
+  justify-content: center; 
+}
+
+.card__save-button {
+  display: flex;
+  padding: 15px 20px;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--accent-color, #000);
+  gap: 12px; 
+}
+
+@media (width <= 375px) {
+.card__save-button {
+    flex-direction: column;
+    height: 80px;
+  }
+}
+
+.like-icon .core {
+  fill: transparent;
+  transition: fill 0.3s linear;
+  transition-delay: 0.03s;
+}
+
+.like-icon:hover .core {
+  fill: var(--accent-color, #000);
+  transition: fill 0.3s linear;
+}
+
+.like-icon:active .core {
+  fill: var(--like-color, #f00000);
+  transition: fill 0.3s linear;
+}
+
+.like-icon .main-body {
+  fill: transparent;
+  transition: fill 0.3s linear;
+}
+
+.like-icon:hover .main-body {
+  fill: var(--accent-color, #000);
+  transition: fill 0.3s linear;
+  transition-delay: 0.05s;
+}
+
+.like-icon:active .main-body {
+  fill: var(--like-color, #f00000);
+  transition: fill 0.3s linear;
+  transition-delay: 0.05s;
+}
+
+.like-icon.is-liked .core {
+  fill: var(--like-color, #f00000);
+  animation: fill 0.3s linear;
+}
+
+.like-icon.is-liked .main-body {
+  fill: var(--like-color, #f00000);
+  animation: fill 0.3s 0.05s linear;
+}
+
+.like-icon .contour {
+  fill: var(--accent-color, #000);
+  transition: fill 0.1s linear;
+}
+
+.like-icon.is-liked .contour {
+  fill: var(--like-color, #f00000);
+  animation: fill 0.3s 0.06s linear;
+}
+
+.like-icon.is-liked .heart {
+  animation: heart 0.3s linear 0.1s 1;
+  transform-origin: center;
+  animation-direction: alternate;
+}
+
+.like-icon.is-liked .sparks {
+  animation: sparks 0.3s ease-in 0.3s 1;
+  animation-direction: alternate;
+}
+
+@keyframes heart {
+  0% {
+    scale: 1;
+  }
+
+  100% {
+    scale: 1.5;
+  }
+}
+
+@keyframes sparks {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.svg-button {
+  max-width: 20px;
+  height: auto;
+}
+
+.dialog[open] {
+  width: 357px;
+  padding: 30px;
+  font-family: var(--accent-font, "PressStrart2P");
+  color: var(--accent-color, #000);
+  background-color: var(--bg-color, #fff);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border: 2px solid var(--accent-color, #000);
+}
+
+.dialog-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.svg-dialog {
+  width: 85px;
+  height: 40px;
+  fill: var(--accent-color, #000);
+}
+
+.dialog-title {
+  font-size: 14px;
+  font-variation-settings: "wght" var(--text-font-weight);
+  line-height: 21px;
+  text-transform: uppercase;
+}
+
+form .button {
+  width: 100%;
+  height: 38px;
+  border: 2px solid var(--accent-color, #000);
+}
